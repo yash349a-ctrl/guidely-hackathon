@@ -1872,24 +1872,28 @@ export const WorkspacePage: React.FC = () => {
           )}
         </AnimatePresence>
 
-        {/* CONCEPT DETAILS MOBILE BOTTOM SHEET */}
-        <AnimatePresence>
-          {isMobile && activeInspectorNode && typeof document !== "undefined" && createPortal(
+        {/* CONCEPT DETAILS MOBILE FULL-SCREEN DIALOG */}
+        {activeInspectorNode && typeof document !== "undefined" && createPortal(
             <motion.div
               key="mobile-concept-sheet"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", damping: 28, stiffness: 220 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${activeInspectorNode.label} concept details`}
               onPointerDown={(e) => e.stopPropagation()}
               onTouchStart={(e) => e.stopPropagation()}
-              className="fixed bottom-0 left-0 right-0 w-full max-w-full h-[62dvh] max-h-[85dvh] bg-bg-surface border-t border-border-primary shadow-2xl z-[100] flex flex-col font-sans rounded-t-3xl overflow-hidden pointer-events-auto"
+              data-mobile-concept-dialog="true"
+              className="fixed inset-0 w-screen max-w-none h-screen h-[100dvh] min-h-[100svh] max-h-none bg-bg-surface shadow-2xl z-[9999] flex-col font-sans overflow-hidden pointer-events-auto flex md:hidden"
+              style={{
+                zIndex: 2147483647,
+                paddingTop: "env(safe-area-inset-top)",
+              }}
             >
-              {/* Premium Mobile Bottom Sheet Drag Handle */}
-              <div className="w-12 h-1 bg-text-muted/30 rounded-full mx-auto my-2.5 shrink-0" />
-
-              {/* Drawer Header */}
-              <div className="p-4 pt-1.5 border-b border-border-primary/60 flex items-center justify-between bg-bg-sidebar/80 shrink-0">
+              {/* Full-screen mobile header */}
+              <div className="p-4 border-b border-border-primary/60 flex items-center justify-between bg-bg-sidebar/95 backdrop-blur shrink-0">
                 <div className="flex items-center space-x-2">
                   <BookOpen className="w-4 h-4 text-blue-500" />
                   <span className="text-xs font-bold text-text-secondary uppercase tracking-wide">
@@ -1907,7 +1911,10 @@ export const WorkspacePage: React.FC = () => {
               </div>
 
               {/* Drawer Scrollable Content */}
-              <div className="flex-1 overflow-y-auto p-5 pb-8 space-y-5 text-left min-w-0 break-words">
+              <div
+                className="min-h-0 flex-1 overflow-y-auto overscroll-contain touch-pan-y p-4 pb-8 space-y-5 text-left min-w-0 break-words"
+                style={{ WebkitOverflowScrolling: "touch" }}
+              >
                 
                 {/* Title & Status Block */}
                 <div className="space-y-3 min-w-0 break-words">
@@ -2057,7 +2064,10 @@ export const WorkspacePage: React.FC = () => {
               </div>
 
               {/* Drawer Actions Footer */}
-              <div className="p-4 bg-bg-sidebar border-t border-border-primary/60 z-10 space-y-3 shrink-0">
+              <div
+                className="p-4 bg-bg-sidebar border-t border-border-primary/60 z-10 space-y-3 shrink-0"
+                style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
+              >
                 {errorMsg && (
                   <div className="p-3 bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 rounded-xl text-xs font-sans flex flex-col gap-1">
                     <span className="font-bold font-mono text-[10px] uppercase tracking-wider">SYSTEM ERROR</span>
@@ -2091,7 +2101,6 @@ export const WorkspacePage: React.FC = () => {
             </motion.div>,
             document.body
           )}
-        </AnimatePresence>
 
         {/* MOBILE LEGEND MODAL OVERLAY */}
         <AnimatePresence>
