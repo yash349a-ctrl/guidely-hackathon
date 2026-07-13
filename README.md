@@ -1,6 +1,7 @@
 <div align="center">
 
-# 🧭 GUIDELY
+#<img width="1254" height="1254" alt="17839698423084265009538795859607" src="https://github.com/user-attachments/assets/d4bbd778-86e7-46d5-a146-b08e9f897b66" />
+  GUIDELY
 
 ### AI-Powered Personalized Learning Navigation
 
