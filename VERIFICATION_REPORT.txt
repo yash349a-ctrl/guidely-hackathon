@@ -1,0 +1,32 @@
+GUIDELY SAME-UI RENDER VERIFICATION
+===================================
+
+UI preservation
+---------------
+PASS: Every existing file under src/ remained byte-for-byte unchanged.
+PASS: index.html remained byte-for-byte unchanged.
+PASS: vite.config.ts remained byte-for-byte unchanged.
+See UI_SOURCE_SHA256.txt for the preserved source checksums.
+
+Deployment changes
+------------------
+PASS: server.ts now uses Number(process.env.PORT) || 3000.
+PASS: render.yaml added for a Node web service on Render.
+PASS: .node-version pins Node.js 22.16.0.
+PASS: No real .env file or secret credentials are included.
+
+Build and runtime tests
+-----------------------
+PASS: npm ci
+PASS: npm run lint
+PASS: npm run build
+PASS: Production server started with NODE_ENV=production and a custom PORT.
+PASS: GET / returned HTTP 200 and the React root.
+PASS: GET /api/health returned status ok.
+PASS: POST /api/assessment/questions returned 5 fallback demo questions.
+PASS: POST /api/assessment/evaluate returned learner profile, knowledge graph, and Study GPS in fallback mode.
+
+Test environment
+----------------
+Node.js: 22.16.0
+npm: 10.9.2

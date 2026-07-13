@@ -1,0 +1,6 @@
+{
+  "name": "GUIDELY",
+  "description": "GUIDELY: The Google Maps for Learning. A personalized AI learning navigation system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

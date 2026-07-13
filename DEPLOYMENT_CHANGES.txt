@@ -1,0 +1,13 @@
+GUIDELY Render deployment changes
+=================================
+
+UI status: UNCHANGED
+
+No source file under src/, index.html, or vite.config.ts was edited.
+Their SHA-256 checksums are saved in UI_SOURCE_SHA256.txt.
+
+Deployment-only changes:
+1. server.ts now reads Render's PORT environment variable and falls back to port 3000 locally.
+2. Added render.yaml for a Render Node web service.
+3. Added .node-version to pin the tested Node.js version.
+4. Added DEPLOY_TO_RENDER.md with deployment steps.
